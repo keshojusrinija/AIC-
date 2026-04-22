@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPortal 360 — One Portal. Every Update. Every Group.</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f5f3ee;--bg2:#eeece6;--white:#fff;--ink:#1a1714;--ink2:#3d3830;--muted:#8a8070;
+  --border:#ddd9d0;--border2:#ccc8be;
+  --orange:#e85d26;--orange2:rgba(232,93,38,0.1);--orange3:rgba(232,93,38,0.06);
+  --teal:#0f7b6c;--teal2:rgba(15,123,108,0.1);
+  --blue:#2151a1;--blue2:rgba(33,81,161,0.09);
+  --amber:#c97c10;--amber2:rgba(201,124,16,0.11);
+  --red:#c0392b;--red2:rgba(192,57,43,0.09);
+  --green:#1d7a4a;--green2:rgba(29,122,74,0.09);
+  --purple:#7c3aed;--purple2:rgba(124,58,237,0.09);
+  --radius:14px;--font:'Outfit',sans-serif;--display:'Fraunces',serif;
+}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
+
+/* ======== LOGIN PAGE ======== */
+#loginPage{
+  display:flex;min-height:100vh;
+  animation:fadeIn .5s ease;
+}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+.login-left{
+  flex:1;background:var(--orange);
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:60px;position:relative;overflow:hidden;
+}
+.login-left::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.login-deco{
+  position:absolute;bottom:-60px;right:-60px;
+  width:340px;height:340px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+}
+.login-deco2{
+  position:absolute;top:-40px;right:80px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+}
+.ll-content{position:relative;z-index:1;animation:slideUp .7s ease both;}
+.ll-logo{display:flex;align-items:center;gap:14px;margin-bottom:48px;}
+.ll-logo-icon{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:22px;font-weight:900;color:#fff;}
+.ll-logo-text{font-family:var(--display);font-size:22px;font-weight:700;color:#fff;}
+.ll-logo-sub{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+.ll-headline{font-family:var(--display);font-size:42px;font-weight:900;color:#fff;line-height:1.15;margin-bottom:18px;max-width:400px;}
+.ll-sub{font-size:15px;color:rgba(255,255,255,0.8);line-height:1.7;max-width:380px;margin-bottom:40px;}
+.ll-features{display:flex;flex-direction:column;gap:14px;}
+.ll-feat{display:flex;align-items:center;gap:13px;}
+.ll-feat-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.ll-feat-text{font-size:13.5px;color:rgba(255,255,255,0.9);font-weight:500;}
+
+.login-right{
+  width:480px;display:flex;flex-direction:column;justify-content:center;
+  padding:60px 52px;background:var(--white);
+}
+.login-form-wrap{animation:slideUp .7s .15s ease both;opacity:0;}
+.lf-title{font-family:var(--display);font-size:28px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.lf-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+
+/* ROLE TABS */
+.role-tabs{display:flex;gap:0;border:1.5px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:28px;}
+.role-tab{flex:1;padding:11px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .18s;border-right:1.5px solid var(--border);}
+.role-tab:last-child{border-right:none;}
+.role-tab:hover{background:var(--bg);color:var(--ink2);}
+.role-tab.rt-active{background:var(--orange);color:#fff;}
+.role-tab-ico{font-size:16px;display:block;margin-bottom:3px;}
+
+/* FORM */
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.form-group input,.form-group select{
+  width:100%;padding:12px 15px;border-radius:10px;border:1.5px solid var(--border);
+  background:var(--bg);font-family:var(--font);font-size:14px;color:var(--ink);
+  outline:none;transition:all .15s;
+}
+.form-group input:focus,.form-group select:focus{border-color:var(--orange);background:var(--white);box-shadow:0 0 0 3px var(--orange3);}
+.form-group input::placeholder{color:var(--muted);}
+.input-wrap{position:relative;}
+.input-wrap input{padding-right:44px;}
+.input-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;color:var(--muted);}
+
+.login-btn{
+  width:100%;padding:13px;border-radius:11px;
+  background:var(--orange);color:#fff;border:none;
+  font-family:var(--display);font-size:16px;font-weight:700;
+  cursor:pointer;transition:all .18s;margin-top:6px;
+  letter-spacing:.3px;
+}
+.login-btn:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,93,38,.3);}
+.login-btn:active{transform:none;}
+
+.demo-accounts{margin-top:28px;padding-top:24px;border-top:1.5px solid var(--border);}
+.da-label{font-size:11.5px;color:var(--muted);margin-bottom:12px;text-align:center;}
+.da-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
+.da-pill{
+  padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);
+  background:var(--bg);font-size:12px;font-weight:500;color:var(--ink2);
+  cursor:pointer;transition:all .15s;
+}
+.da-pill:hover{border-color:var(--orange);color:var(--orange);}
+.da-pill b{color:var(--orange);}
+
+.lf-error{background:var(--red2);color:var(--red);border:1.5px solid rgba(192,57,43,.2);border-radius:9px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:16px;display:none;}
+.lf-error.show{display:block;}
+
+/* ======== APP PAGE ======== */
+#appPage{display:none;flex-direction:column;min-height:100vh;}
+#appPage.show{display:flex;animation:fadeIn .4s ease;}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:7px;}
+.toast-item{background:var(--ink);color:#fff;padding:11px 17px;border-radius:10px;font-size:13px;font-weight:500;max-width:300px;animation:slideUp .3s ease;box-shadow:0 4px 20px rgba(0,0,0,.15);display:flex;align-items:center;gap:9px;}
+.toast-item.success{background:var(--teal);}
+.toast-item.warning{background:var(--amber);}
+.toast-item.error{background:var(--red);}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:500;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--white);border-radius:var(--radius);padding:28px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.modal-title{font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+.modal-close:hover{color:var(--ink);}
+.form-row{margin-bottom:15px;}
+.form-row label{display:block;font-size:11.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:10px 13px;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);font-family:var(--font);font-size:13.5px;color:var(--ink);outline:none;transition:border-color .15s;}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--orange);}
+.form-row textarea{min-height:75px;resize:vertical;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1.5px solid var(--border);}
+
+/* HEADER */
+.header{background:var(--white);border-bottom:1.5px solid var(--border);padding:0 26px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:200;}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:34px;height:34px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;font-family:var(--display);}
+.logo-text{font-family:var(--display);font-size:18px;color:var(--ink);font-weight:700;}
+.logo-text span{color:var(--orange);}
+.logo-tag{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
+.hright{display:flex;align-items:center;gap:8px;}
+.hbtn{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--ink2);font-family:var(--font);transition:all .15s;position:relative;}
+.hbtn:hover{background:var(--bg);}
+.hbtn.primary{background:var(--orange);color:#fff;border-color:var(--orange);}
+.hbtn.primary:hover{opacity:.9;}
+.notif-badge{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1.5px solid #fff;}
+.user-pill{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:30px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;}
+.uav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+.uname{font-size:13px;font-weight:500;}
+.urole-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;}
+
+/* LAYOUT */
+.layout{display:flex;flex:1;}
+
+/* SIDEBAR */
+.sidebar{width:215px;background:var(--white);border-right:1.5px solid var(--border);padding:16px 10px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;display:flex;flex-direction:column;}
+.group-box{background:var(--bg);border-radius:11px;border:1.5px solid var(--border);padding:13px;margin-bottom:16px;}
+.gb-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;}
+.gpills{display:flex;flex-wrap:wrap;gap:5px;}
+.gpill{padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:500;border:1.5px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;background:transparent;font-family:var(--font);}
+.gpill:hover{border-color:var(--orange);color:var(--orange);}
+.gpill.ga{background:var(--orange);color:#fff;border-color:var(--orange);}
+.nav-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding:0 10px;margin-bottom:5px;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink2);cursor:pointer;transition:all .15s;margin-bottom:2px;}
+.nav-item:hover{background:var(--bg);color:var(--ink);}
+.nav-item.active{background:var(--orange2);color:var(--orange);font-weight:600;}
+.nav-ico{font-size:15px;width:17px;text-align:center;}
+.nav-cnt{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.nc-o{background:var(--orange2);color:var(--orange);}
+.nc-r{background:var(--red2);color:var(--red);}
+.nc-a{background:var(--amber2);color:var(--amber);}
+.sidebar-user{margin-top:auto;padding-top:12px;border-top:1.5px solid var(--border);}
+.sb-user-row{display:flex;align-items:center;gap:9px;padding:10px;border-radius:10px;cursor:pointer;transition:background .15s;}
+.sb-user-row:hover{background:var(--bg);}
+.sb-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.sb-info{flex:1;}
+.sb-name{font-size:13px;font-weight:600;color:var(--ink);}
+.sb-role{font-size:11px;color:var(--muted);}
+.logout-btn{display:flex;align-items:center;gap:6px;padding:8px 11px;border-radius:9px;font-size:13px;font-weight:500;color:var(--red);cursor:pointer;margin-top:4px;transition:background .15s;}
+.logout-btn:hover{background:var(--red2);}
+
+/* MAIN */
+.main{flex:1;padding:24px 28px;min-width:0;}
+.phd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:14px;}
+.ptitle{font-family:var(--display);font-size:25px;font-weight:700;color:var(--ink);letter-spacing:-.5px;line-height:1.15;}
+.ptitle span{color:var(--orange);}
+.psub{font-size:12.5px;color:var(--muted);margin-top:4px;}
+.arow{display:flex;gap:7px;flex-shrink:0;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+.stat{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px;position:relative;overflow:hidden;}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:2px 2px 0 0;}
+.stat.so::before{background:var(--orange);}
+.stat.st::before{background:var(--teal);}
+.stat.sb::before{background:var(--blue);}
+.stat.sr::before{background:var(--red);}
+.stat.sa::before{background:var(--amber);}
+.stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;}
+.stat-val{font-size:27px;font-weight:700;color:var(--ink);line-height:1;font-family:var(--display);}
+.stat.so .stat-val{color:var(--orange);}
+.stat.st .stat-val{color:var(--teal);}
+.stat.sb .stat-val{color:var(--blue);}
+.stat.sr .stat-val{color:var(--red);}
+.stat.sa .stat-val{color:var(--amber);}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:5px;}
+.stat-ico{position:absolute;bottom:12px;right:14px;font-size:24px;opacity:.1;}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1.25fr 1fr;gap:15px;margin-bottom:17px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:17px;}
+.gcol{display:flex;flex-direction:column;gap:15px;}
+
+/* CARD */
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.card-head{padding:14px 18px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.ctitle{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink2);}
+.cact{font-size:12px;color:var(--orange);cursor:pointer;font-weight:500;}
+.cbody{padding:14px 18px;}
+
+/* WARNINGS */
+.warn-banner{background:var(--amber2);border:1.5px solid rgba(201,124,16,.25);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:11px;margin-bottom:14px;font-size:13px;color:var(--amber);font-weight:500;}
+.danger-banner{background:var(--red2);border:1.5px solid rgba(192,57,43,.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:11px;margin-bottom:14px;font-size:13px;color:var(--red);font-weight:500;}
+
+/* PILLS */
+.pill{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}
+.p-due{background:var(--amber2);color:var(--amber);}
+.p-sub{background:var(--green2);color:var(--green);}
+.p-late{background:var(--red2);color:var(--red);}
+.p-pend{background:var(--blue2);color:var(--blue);}
+.p-rev{background:var(--purple2);color:var(--purple);}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead th{padding:9px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;border-bottom:1.5px solid var(--border);}
+tbody tr{border-bottom:1.5px solid var(--border);transition:background .12s;}
+tbody tr:hover{background:var(--bg);}
+tbody tr:last-child{border-bottom:none;}
+tbody td{padding:12px 14px;color:var(--ink2);vertical-align:middle;}
+.tbl-act{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:var(--font);transition:all .15s;}
+.btn-primary{background:var(--orange);color:#fff;}
+.btn-primary:hover{opacity:.88;}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border);}
+.btn-ghost:hover{border-color:var(--border2);color:var(--ink2);}
+.btn-danger{background:var(--red2);color:var(--red);border:1.5px solid rgba(192,57,43,.2);}
+.btn-danger:hover{background:var(--red);color:#fff;}
+.btn-sm{padding:5px 12px;font-size:12px;border-radius:7px;}
+.btn-teal{background:var(--teal2);color:var(--teal);border:1.5px solid rgba(15,123,108,.2);}
+.btn-teal:hover{background:var(--teal);color:#fff;}
+
+/* FILTER BAR */
+.fbar{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+.fbtn{padding:6px 15px;border-radius:20px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:12.5px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .15s;}
+.fbtn:hover{border-color:var(--border2);color:var(--ink);}
+.fbtn.fa{background:var(--orange);border-color:var(--orange);color:#fff;}
+
+/* ASSIGN ITEM */
+.ai{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1.5px solid var(--border);}
+.ai:last-child{border-bottom:none;}
+.ai-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.ai-info{flex:1;}
+.ai-name{font-size:13px;font-weight:600;color:var(--ink);}
+.ai-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* ANNOUNCEMENT */
+.ann{padding:11px 0;border-bottom:1.5px solid var(--border);}
+.ann:last-child{border-bottom:none;}
+.atag{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 9px;border-radius:20px;margin-bottom:5px;}
+.at-hol{background:var(--teal2);color:var(--teal);}
+.at-sus{background:var(--red2);color:var(--red);}
+.at-not{background:var(--blue2);color:var(--blue);}
+.at-ex{background:var(--amber2);color:var(--amber);}
+.ann-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.ann-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.ann-date{font-size:11px;color:var(--muted);margin-top:4px;}
+.ann-groups{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.ag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:9px;background:var(--bg2);color:var(--muted);border:1px solid var(--border);}
+
+/* ATT BAR */
+.att-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1.5px solid var(--border);}
+.att-row:last-child{border-bottom:none;}
+.att-name{font-size:12.5px;font-weight:500;color:var(--ink);width:130px;flex-shrink:0;}
+.att-track{flex:1;height:6px;background:var(--bg2);border-radius:10px;overflow:hidden;}
+.att-bar{height:100%;border-radius:10px;transition:width .7s ease;}
+.att-pct{font-size:12px;font-weight:700;width:40px;text-align:right;}
+.att-edit{font-size:11px;color:var(--orange);cursor:pointer;}
+
+/* HOLIDAY CARD */
+.hcard{border-radius:11px;padding:14px;margin-bottom:9px;border-left:4px solid;}
+.hc-hol{background:var(--teal2);border-color:var(--teal);}
+.hc-sus{background:var(--red2);border-color:var(--red);}
+.hc-ex{background:var(--amber2);border-color:var(--amber);}
+.hc-not{background:var(--blue2);border-color:var(--blue);}
+.hctop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;gap:8px;}
+.hcname{font-size:13px;font-weight:700;color:var(--ink);}
+.hcdate{font-size:11px;color:var(--muted);white-space:nowrap;}
+.hcdesc{font-size:12px;color:var(--ink2);margin:4px 0 7px;}
+.hc-actions{display:flex;gap:5px;margin-top:7px;}
+
+/* COUNTDOWN */
+.countdown{display:flex;gap:7px;margin-top:10px;}
+.cdb{flex:1;background:var(--bg);border-radius:9px;padding:8px 0;text-align:center;border:1.5px solid var(--border);}
+.cdn{font-size:20px;font-weight:800;color:var(--orange);font-family:var(--display);}
+.cdl{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:2px;}
+
+/* CAL STRIP */
+.cstrip{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;}
+.cstrip::-webkit-scrollbar{height:0;}
+.cday{flex-shrink:0;width:48px;padding:8px 0;border-radius:10px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:all .15s;}
+.cday:hover{border-color:var(--orange);background:var(--orange3);}
+.cday.ct{background:var(--orange);border-color:var(--orange);}
+.cday.ce{border-color:var(--teal);}
+.cdw{font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:3px;}
+.ct .cdw{color:rgba(255,255,255,.75);}
+.cdd{font-size:15px;font-weight:700;color:var(--ink);}
+.ct .cdd{color:#fff;}
+.cdt{width:4px;height:4px;border-radius:50%;background:var(--teal);margin:3px auto 0;}
+.ct .cdt{background:rgba(255,255,255,.75);}
+
+/* DEADLINE ITEM */
+.dl-item{display:flex;align-items:center;gap:11px;padding:11px;border-radius:10px;border:1.5px solid var(--border);margin-bottom:8px;background:var(--bg);}
+.dl-item.urgent{border-color:rgba(192,57,43,.35);background:var(--red2);}
+.dl-item.soon{border-color:rgba(201,124,16,.3);background:var(--amber2);}
+.dl-days{font-size:20px;font-weight:800;font-family:var(--display);width:44px;text-align:center;flex-shrink:0;}
+.dl-info{flex:1;}
+.dl-name{font-size:13px;font-weight:600;color:var(--ink);}
+.dl-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* SECTION */
+.section{display:none;animation:fadeUp .28s ease both;}
+.section.active{display:block;}
+
+/* TT CELL */
+.tt-cell{cursor:pointer;padding:2px 4px;border-radius:4px;transition:background .12s;}
+.tt-cell:hover{background:var(--orange3);}
+
+/* DISC */
+.disc{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1.5px solid var(--border);}
+.disc:last-child{border-bottom:none;}
+.dav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
+
+@media(max-width:860px){
+  .login-left{display:none;}
+  .login-right{width:100%;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .g2{grid-template-columns:1fr;}
+  .g3{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN PAGE ============ -->
+<div id="loginPage">
+  <div class="login-left">
+    <div class="login-deco"></div>
+    <div class="login-deco2"></div>
+    <div class="ll-content">
+      <div class="ll-logo">
+        <div class="ll-logo-icon">E</div>
+        <div>
+          <div class="ll-logo-text">EduPortal 360</div>
+          <div class="ll-logo-sub">One Portal. Every Update. Every Group.</div>
+        </div>
+      </div>
+      <div class="ll-headline">Your Academic Life, All in One Place.</div>
+      <div class="ll-sub">Track assignments, check attendance, view holidays, manage timetables — segregated group-wise. Built for students and faculty alike.</div>
+      <div class="ll-features">
+        <div class="ll-feat"><div class="ll-feat-ico">📋</div><div class="ll-feat-text">Group-wise assignment tracking & submission</div></div>
+        <div class="ll-feat"><div class="ll-feat-ico">📅</div><div class="ll-feat-text">Holiday & class suspension announcements</div></div>
+        <div class="ll-feat"><div class="ll-feat-ico">✅</div><div class="ll-feat-text">Attendance monitoring with shortage alerts</div></div>
+        <div class="ll-feat"><div class="ll-feat-ico">⏰</div><div class="ll-feat-text">Live deadline countdown tracker</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-form-wrap">
+      <div class="lf-title">Welcome back 👋</div>
+      <div class="lf-sub">Sign in to your EduPortal 360 account</div>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <div class="role-tab rt-active" onclick="setRole('student',this)">
+          <span class="role-tab-ico">🎓</span>Student
+        </div>
+        <div class="role-tab" onclick="setRole('faculty',this)">
+          <span class="role-tab-ico">👨‍🏫</span>Faculty
+        </div>
+        <div class="role-tab" onclick="setRole('admin',this)">
+          <span class="role-tab-ico">🏛️</span>Admin
+        </div>
+      </div>
+
+      <div class="lf-error" id="loginError">Invalid credentials. Try a demo account below.</div>
+
+      <div class="form-group">
+        <label>Email / Roll Number</label>
+        <input type="text" id="loginEmail" placeholder="e.g. 22CSA047 or arjun@college.edu">
+      </div>
+
+      <div class="form-group" id="groupFieldWrap">
+        <label>Group / Section</label>
+        <select id="loginGroup">
+          <option value="CS-A">CS-A</option>
+          <option value="CS-B">CS-B</option>
+          <option value="IT-A">IT-A</option>
+          <option value="IT-B">IT-B</option>
+          <option value="ECE">ECE</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <input type="password" id="loginPass" placeholder="Enter your password">
+          <span class="input-eye" onclick="togglePass()">👁️</span>
+        </div>
+      </div>
+
+      <button class="login-btn" onclick="doLogin()">Sign In →</button>
+
+      <div class="demo-accounts">
+        <div class="da-label">— Quick Demo Login —</div>
+        <div class="da-pills">
+          <div class="da-pill" onclick="quickLogin('student','22CSA047','pass123','CS-A')">🎓 <b>Student</b> CS-A</div>
+          <div class="da-pill" onclick="quickLogin('student','22CSB012','pass123','CS-B')">🎓 <b>Student</b> CS-B</div>
+          <div class="da-pill" onclick="quickLogin('faculty','faculty@college.edu','faculty123','')">👨‍🏫 <b>Faculty</b></div>
+          <div class="da-pill" onclick="quickLogin('admin','admin@college.edu','admin123','')">🏛️ <b>Admin</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP PAGE ============ -->
+<div id="appPage">
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <!-- MODALS -->
+  <div class="modal-bg" id="modalAssign">
+    <div class="modal">
+      <div class="modal-head"><span class="modal-title" id="assignModalTitle">Add Assignment</span><button class="modal-close" onclick="closeModal('modalAssign')">✕</button></div>
+      <div class="form-grid">
+        <div class="form-row" style="grid-column:1/-1"><label>Title</label><input type="text" id="aTitle" placeholder="Assignment title"></div>
+        <div class="form-row"><label>Subject</label><select id="aSubject"><option>Operating Systems</option><option>DBMS</option><option>Comp. Networks</option><option>Soft. Engineering</option><option>Mathematics IV</option></select></div>
+        <div class="form-row"><label>Faculty</label><input type="text" id="aFaculty" placeholder="Prof. Name"></div>
+        <div class="form-row"><label>Due Date</label><input type="date" id="aDue"></div>
+        <div class="form-row"><label>Group</label><select id="aGroup"><option>CS-A</option><option>CS-B</option><option>IT-A</option><option>IT-B</option><option>ECE</option><option>All Groups</option></select></div>
+        <div class="form-row" style="grid-column:1/-1"><label>Description</label><textarea id="aDesc" placeholder="Additional instructions..."></textarea></div>
+      </div>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalAssign')">Cancel</button><button class="btn btn-primary" onclick="saveAssignment()">💾 Save</button></div>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modalHoliday">
+    <div class="modal">
+      <div class="modal-head"><span class="modal-title" id="holidayModalTitle">Add Holiday / Notice</span><button class="modal-close" onclick="closeModal('modalHoliday')">✕</button></div>
+      <div class="form-row"><label>Type</label><select id="hType"><option value="holiday">🌿 Holiday</option><option value="suspension">⚠️ Suspension</option><option value="exam">📝 Exam</option><option value="notice">📢 Notice</option></select></div>
+      <div class="form-row"><label>Title</label><input type="text" id="hTitle" placeholder="Event title"></div>
+      <div class="form-row"><label>Description</label><textarea id="hDesc" placeholder="Details..."></textarea></div>
+      <div class="form-grid">
+        <div class="form-row"><label>Date</label><input type="date" id="hDate"></div>
+        <div class="form-row"><label>Group</label><select id="hGroup"><option>All Groups</option><option>CS-A</option><option>CS-B</option><option>IT-A</option><option>IT-B</option><option>ECE</option></select></div>
+      </div>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalHoliday')">Cancel</button><button class="btn btn-primary" onclick="saveHoliday()">💾 Save</button></div>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modalAttend">
+    <div class="modal">
+      <div class="modal-head"><span class="modal-title">Update Attendance</span><button class="modal-close" onclick="closeModal('modalAttend')">✕</button></div>
+      <div class="form-row"><label>Subject</label><select id="attSubject" onchange="prefillAtt()"><option>Operating Systems</option><option>DBMS</option><option>Comp. Networks</option><option>Soft. Engineering</option><option>Mathematics IV</option></select></div>
+      <div class="form-grid">
+        <div class="form-row"><label>Classes Held</label><input type="number" id="attHeld" placeholder="e.g. 30" oninput="updateAttPreview()"></div>
+        <div class="form-row"><label>Classes Attended</label><input type="number" id="attAtt" placeholder="e.g. 28" oninput="updateAttPreview()"></div>
+      </div>
+      <div id="attPreview" style="font-size:13px;color:var(--muted);margin-top:4px;"></div>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalAttend')">Cancel</button><button class="btn btn-primary" onclick="saveAttendance()">💾 Update</button></div>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modalTT">
+    <div class="modal" style="max-width:400px;">
+      <div class="modal-head"><span class="modal-title">Edit Timetable</span><button class="modal-close" onclick="closeModal('modalTT')">✕</button></div>
+      <div id="ttCellInfo" style="font-size:12px;color:var(--muted);margin-bottom:14px;"></div>
+      <div class="form-row"><label>Subject</label><select id="ttSubject"><option>Operating Systems</option><option>DBMS</option><option>Comp. Networks</option><option>Soft. Engineering</option><option>Mathematics IV</option><option>OS Lab</option><option>DBMS Lab</option><option>CN Lab</option><option>FREE</option></select></div>
+      <div class="form-row"><label>Faculty</label><input type="text" id="ttFaculty" placeholder="Prof. Name"></div>
+      <div class="form-row"><label>Note (optional)</label><input type="text" id="ttNote" placeholder="e.g. Cancelled"></div>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalTT')">Cancel</button><button class="btn btn-primary" onclick="saveTTCell()">💾 Update</button></div>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="modalStatus">
+    <div class="modal" style="max-width:400px;">
+      <div class="modal-head"><span class="modal-title">Update Status</span><button class="modal-close" onclick="closeModal('modalStatus')">✕</button></div>
+      <div id="statusAssignName" style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:14px;"></div>
+      <div class="form-row"><label>Status</label><select id="statusVal"><option value="pending">Pending</option><option value="submitted">Submitted</option><option value="late">Late</option><option value="due">Due Soon</option><option value="review">Under Review</option></select></div>
+      <div class="form-row"><label>Note</label><input type="text" id="statusNote" placeholder="Optional note..."></div>
+      <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalStatus')">Cancel</button><button class="btn btn-primary" onclick="saveStatus()">✅ Update</button></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-wrap">
+      <div class="logo-icon">E</div>
+      <div>
+        <div class="logo-text">EduPortal <span>360</span></div>
+        <div class="logo-tag">One Portal. Every Update. Every Group.</div>
+      </div>
+    </div>
+    <div class="hright">
+      <div id="hRoleBtns"></div>
+      <div class="hbtn" style="cursor:default;">🔔<div class="notif-badge" id="notifBadge"></div></div>
+      <div class="user-pill" id="userPill"></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="group-box" id="groupBox">
+        <div class="gb-label">Group / Section</div>
+        <div class="gpills" id="groupPills"></div>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div class="nav-lbl">Main</div>
+        <div class="nav-item active" onclick="goto('dashboard',this)"><span class="nav-ico">⊞</span>Dashboard</div>
+        <div class="nav-item" onclick="goto('assignments',this)"><span class="nav-ico">📋</span>Assignments<span class="nav-cnt nc-o" id="pendCnt">4</span></div>
+        <div class="nav-item" onclick="goto('deadlines',this)"><span class="nav-ico">⏰</span>Deadlines<span class="nav-cnt nc-a" id="urgCnt">2</span></div>
+        <div class="nav-item" onclick="goto('holidays',this)"><span class="nav-ico">📅</span>Holidays &amp; Notices</div>
+        <div class="nav-item" onclick="goto('attendance',this)"><span class="nav-ico">✅</span>Attendance<span class="nav-cnt nc-r" id="warnCnt">1</span></div>
+        <div class="nav-item" onclick="goto('timetable',this)"><span class="nav-ico">🗓️</span>Timetable</div>
+        <div class="nav-item" onclick="goto('resources',this)"><span class="nav-ico">📚</span>Resources</div>
+        <div class="nav-item" onclick="goto('discussions',this)"><span class="nav-ico">💬</span>Discussions</div>
+      </div>
+      <div style="margin-top:auto;">
+        <div class="nav-lbl">Account</div>
+        <div class="nav-item" onclick="goto('profile',this)"><span class="nav-ico">👤</span>Profile</div>
+      </div>
+      <div class="sidebar-user">
+        <div class="sb-user-row" id="sbUserRow"></div>
+        <div class="logout-btn" onclick="doLogout()">🚪 Sign Out</div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+      <!-- DASHBOARD -->
+      <div class="section active" id="dashboard">
+        <div class="phd">
+          <div>
+            <div class="ptitle" id="dashGreet">Good Morning 👋</div>
+            <div class="psub" id="dashSub"></div>
+          </div>
+          <div class="arow" id="dashActions"></div>
+        </div>
+        <div id="dashWarnings"></div>
+        <div class="stats">
+          <div class="stat so"><div class="stat-lbl">Pending</div><div class="stat-val" id="ds1">–</div><div class="stat-sub">Assignments</div><div class="stat-ico">📋</div></div>
+          <div class="stat st"><div class="stat-lbl">Submitted</div><div class="stat-val" id="ds2">–</div><div class="stat-sub">This semester</div><div class="stat-ico">✅</div></div>
+          <div class="stat sb"><div class="stat-lbl">Holidays</div><div class="stat-val" id="ds3">–</div><div class="stat-sub">Next 30 days</div><div class="stat-ico">📅</div></div>
+          <div class="stat sr"><div class="stat-lbl">Attendance</div><div class="stat-val" id="ds4">–</div><div class="stat-sub">Overall average</div><div class="stat-ico">📊</div></div>
+        </div>
+        <div class="g2">
+          <div class="gcol">
+            <div class="card">
+              <div class="card-head"><span class="ctitle">Calendar · March 2026</span></div>
+              <div class="cbody">
+                <div class="cstrip">
+                  <div class="cday"><div class="cdw">Mon</div><div class="cdd">24</div></div>
+                  <div class="cday ce"><div class="cdw">Tue</div><div class="cdd">25</div><div class="cdt"></div></div>
+                  <div class="cday"><div class="cdw">Wed</div><div class="cdd">26</div></div>
+                  <div class="cday"><div class="cdw">Thu</div><div class="cdd">27</div></div>
+                  <div class="cday ce"><div class="cdw">Fri</div><div class="cdd">28</div><div class="cdt"></div></div>
+                  <div class="cday"><div class="cdw">Sat</div><div class="cdd">29</div></div>
+                  <div class="cday ct"><div class="cdw">Sun</div><div class="cdd">30</div><div class="cdt"></div></div>
+                  <div class="cday ce"><div class="cdw">Mon</div><div class="cdd">31</div><div class="cdt"></div></div>
+                  <div class="cday"><div class="cdw">Tue</div><div class="cdd">1</div></div>
+                  <div class="cday ce"><div class="cdw">Wed</div><div class="cdd">2</div><div class="cdt"></div></div>
+                </div>
+                <div id="dashCalAnn" style="margin-top:12px;"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><span class="ctitle">Recent Assignments</span><span class="cact" onclick="goto('assignments',null)">See all →</span></div>
+              <div class="cbody" style="padding-top:6px;" id="dashAssignList"></div>
+            </div>
+          </div>
+          <div class="gcol">
+            <div class="card">
+              <div class="card-head"><span class="ctitle">Next Deadline</span></div>
+              <div class="cbody" id="dashDeadlineCard"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><span class="ctitle">Announcements</span><span class="cact" onclick="goto('holidays',null)">See all →</span></div>
+              <div class="cbody" style="padding-top:6px;" id="dashAnnList"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><span class="ctitle">Attendance Summary</span><span class="cact" onclick="goto('attendance',null)">View →</span></div>
+              <div class="cbody" style="padding-top:6px;" id="dashAttList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSIGNMENTS -->
+      <div class="section" id="assignments">
+        <div class="phd">
+          <div><div class="ptitle">Assignments</div><div class="psub" id="assignSub"></div></div>
+          <div class="arow" id="assignActions"></div>
+        </div>
+        <div class="fbar">
+          <button class="fbtn fa" onclick="filterAssign(this,'all')">All</button>
+          <button class="fbtn" onclick="filterAssign(this,'pending')">Pending</button>
+          <button class="fbtn" onclick="filterAssign(this,'submitted')">Submitted</button>
+          <button class="fbtn" onclick="filterAssign(this,'late')">Late</button>
+          <button class="fbtn" onclick="filterAssign(this,'due')">Due Soon</button>
+        </div>
+        <div class="card">
+          <div class="tbl-wrap"><table><thead><tr><th>Title</th><th>Subject</th><th>Faculty</th><th>Group</th><th>Due Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="assignTable"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- DEADLINES -->
+      <div class="section" id="deadlines">
+        <div class="phd"><div><div class="ptitle">Upcoming <span>Deadlines</span></div><div class="psub">Sorted by urgency</div></div></div>
+        <div id="deadlineWarnings"></div>
+        <div class="g2">
+          <div class="card" style="margin-bottom:0;"><div class="card-head"><span class="ctitle">⏰ Deadline Tracker</span></div><div class="cbody" id="deadlineList"></div></div>
+          <div class="card" style="margin-bottom:0;"><div class="card-head"><span class="ctitle">Next Due · Countdown</span></div><div class="cbody" id="deadlineCountdown"></div></div>
+        </div>
+      </div>
+
+      <!-- HOLIDAYS -->
+      <div class="section" id="holidays">
+        <div class="phd">
+          <div><div class="ptitle">Holidays &amp; <span>Notices</span></div><div class="psub" id="holidaySub"></div></div>
+          <div class="arow" id="holidayActions"></div>
+        </div>
+        <div class="fbar">
+          <button class="fbtn fa" onclick="filterHoliday(this,'all')">All</button>
+          <button class="fbtn" onclick="filterHoliday(this,'holiday')">Holidays</button>
+          <button class="fbtn" onclick="filterHoliday(this,'suspension')">Suspensions</button>
+          <button class="fbtn" onclick="filterHoliday(this,'exam')">Exams</button>
+          <button class="fbtn" onclick="filterHoliday(this,'notice')">Notices</button>
+        </div>
+        <div class="g2">
+          <div id="holidayList"></div>
+          <div class="card"><div class="card-head"><span class="ctitle">Group-wise Notices</span></div><div class="cbody" style="padding-top:6px;" id="groupNotices"></div></div>
+        </div>
+      </div>
+
+      <!-- ATTENDANCE -->
+      <div class="section" id="attendance">
+        <div class="phd">
+          <div><div class="ptitle">Attendance</div><div class="psub">Current Semester</div></div>
+          <div class="arow" id="attendActions"></div>
+        </div>
+        <div id="attWarnings"></div>
+        <div class="stats">
+          <div class="stat so"><div class="stat-lbl">Overall</div><div class="stat-val" id="attOverall">–</div><div class="stat-sub">Average</div></div>
+          <div class="stat st"><div class="stat-lbl">Attended</div><div class="stat-val" id="attAttended">–</div><div class="stat-sub">Classes</div></div>
+          <div class="stat sb"><div class="stat-lbl">Total Held</div><div class="stat-val" id="attHeldStat">–</div><div class="stat-sub">Classes</div></div>
+          <div class="stat sr"><div class="stat-lbl">Warnings</div><div class="stat-val" id="attWarnStat">–</div><div class="stat-sub">Below 75%</div></div>
+        </div>
+        <div class="card"><div class="card-head"><span class="ctitle">Subject-wise Attendance</span><span class="cact" onclick="openModal('modalAttend')">+ Update</span></div><div class="cbody" style="padding-top:6px;" id="attTable"></div></div>
+      </div>
+
+      <!-- TIMETABLE -->
+      <div class="section" id="timetable">
+        <div class="phd"><div><div class="ptitle">Timetable</div><div class="psub" id="ttSub">Click any cell to edit</div></div></div>
+        <div class="warn-banner" id="ttWarnBanner">🖊️ Click any cell to update the subject, faculty, or add a note.</div>
+        <div class="card"><div class="tbl-wrap"><table><thead><tr><th>Period</th><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead><tbody id="ttBody"></tbody></table></div></div>
+      </div>
+
+      <!-- RESOURCES -->
+      <div class="section" id="resources">
+        <div class="phd"><div><div class="ptitle">Resources</div><div class="psub">Study materials & notes</div></div><button class="btn btn-primary btn-sm">+ Upload</button></div>
+        <div class="g3">
+          <div class="card"><div class="card-head"><span class="ctitle">📖 Operating Systems</span></div><div class="cbody" style="padding-top:6px;">
+            <div class="ai"><div class="ai-ico" style="background:var(--orange2);">📄</div><div class="ai-info"><div class="ai-name">Unit 1 Notes.pdf</div><div class="ai-meta">2.4 MB · 10 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+            <div class="ai"><div class="ai-ico" style="background:var(--orange2);">📊</div><div class="ai-info"><div class="ai-name">Process Scheduling.pptx</div><div class="ai-meta">1.8 MB · 17 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+          </div></div>
+          <div class="card"><div class="card-head"><span class="ctitle">🗄️ DBMS</span></div><div class="cbody" style="padding-top:6px;">
+            <div class="ai"><div class="ai-ico" style="background:var(--teal2);">📄</div><div class="ai-info"><div class="ai-name">ER Diagrams Guide.pdf</div><div class="ai-meta">3.2 MB · 12 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+            <div class="ai"><div class="ai-ico" style="background:var(--teal2);">📝</div><div class="ai-info"><div class="ai-name">SQL Practice.docx</div><div class="ai-meta">0.9 MB · 20 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+          </div></div>
+          <div class="card"><div class="card-head"><span class="ctitle">🌐 Comp. Networks</span></div><div class="cbody" style="padding-top:6px;">
+            <div class="ai"><div class="ai-ico" style="background:var(--blue2);">📄</div><div class="ai-info"><div class="ai-name">TCP/IP Layers.pdf</div><div class="ai-meta">1.1 MB · 8 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+            <div class="ai"><div class="ai-ico" style="background:var(--blue2);">🔧</div><div class="ai-info"><div class="ai-name">Wireshark Lab Guide.pdf</div><div class="ai-meta">2.7 MB · 22 Mar</div></div><button class="btn btn-ghost btn-sm">↓</button></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- DISCUSSIONS -->
+      <div class="section" id="discussions">
+        <div class="phd"><div><div class="ptitle">Discussions</div><div class="psub">Group Q&A Threads</div></div><button class="btn btn-primary btn-sm">+ New Thread</button></div>
+        <div class="card"><div class="cbody" style="padding-top:6px;">
+          <div class="disc"><div class="dav" style="background:var(--orange);">RK</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">Help with OS Lab Report — Semaphore section?</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Riya K. · CS-A · 2 hours ago · 💬 12 replies</div></div><span class="pill p-pend">Active</span></div>
+          <div class="disc"><div class="dav" style="background:var(--teal);">AK</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">DBMS Project — Team formation</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Arjun K. · CS-A · 1 day ago · 💬 7 replies</div></div><span class="pill p-sub">Resolved</span></div>
+          <div class="disc"><div class="dav" style="background:var(--blue);">PS</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">Mid-Sem doubts — CN layer protocols</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Priya S. · CS-A · 3 hours ago · 💬 21 replies</div></div><span class="pill p-pend">Active</span></div>
+        </div></div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="section" id="profile">
+        <div class="phd"><div><div class="ptitle">My Profile</div><div class="psub">Account details</div></div></div>
+        <div class="g2">
+          <div class="card" style="text-align:center;padding:30px;" id="profileCard"></div>
+          <div class="card"><div class="card-head"><span class="ctitle">Account Details</span></div><div class="cbody" id="profileDetails"></div></div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /appPage -->
+
+<script>
+// ========== STATE ==========
+let currentUser = null;
+let currentGroup = 'CS-A';
+let editingAssignIdx = null;
+let editingHolidayIdx = null;
+let editingTTCell = null;
+let editingStatusIdx = null;
+let selectedRole = 'student';
+
+const DEMO_ACCOUNTS = {
+  '22CSA047': {pass:'pass123',role:'student',name:'Arjun Kumar',group:'CS-A',avatar:'AK',roll:'22CSA047',email:'arjun.k@college.edu',dept:'CSE',sem:'4',cgpa:'8.4',avColor:'var(--orange)'},
+  '22CSB012': {pass:'pass123',role:'student',name:'Priya Sharma',group:'CS-B',avatar:'PS',roll:'22CSB012',email:'priya.s@college.edu',dept:'CSE',sem:'4',cgpa:'8.9',avColor:'var(--blue)'},
+  'faculty@college.edu': {pass:'faculty123',role:'faculty',name:'Prof. Ramesh Kumar',group:'',avatar:'RK',email:'ramesh.k@college.edu',dept:'CSE',avColor:'var(--teal)'},
+  'admin@college.edu':   {pass:'admin123',role:'admin',name:'Dr. Admin Office',group:'',avatar:'AO',email:'admin@college.edu',dept:'Admin Office',avColor:'var(--purple)'},
+};
+
+let assignments = [
+  {title:'OS Lab Report',subject:'Operating Systems',faculty:'Prof. Ramesh',group:'CS-A',due:'2026-03-31',status:'due',desc:'Complete all experiments.'},
+  {title:'DBMS Project Proposal',subject:'DBMS',faculty:'Prof. Lalitha',group:'CS-A',due:'2026-04-03',status:'pending',desc:''},
+  {title:'CN Assignment #3',subject:'Comp. Networks',faculty:'Prof. Arun',group:'CS-A',due:'2026-03-26',status:'submitted',desc:''},
+  {title:'SE Module 2 Notes',subject:'Soft. Engineering',faculty:'Prof. Meena',group:'CS-A',due:'2026-04-07',status:'pending',desc:''},
+  {title:'Math Assignment #5',subject:'Mathematics IV',faculty:'Prof. Sudha',group:'CS-A',due:'2026-03-20',status:'late',desc:''},
+  {title:'OS Theory #2',subject:'Operating Systems',faculty:'Prof. Ramesh',group:'CS-A',due:'2026-03-15',status:'submitted',desc:''},
+  {title:'CN Assignment #2',subject:'Comp. Networks',faculty:'Prof. Arun',group:'CS-B',due:'2026-04-05',status:'pending',desc:''},
+];
+
+let holidays = [
+  {type:'suspension',title:'Network Lab — 3rd Period Cancelled',desc:'Equipment maintenance. Rescheduled TBD.',date:'2026-03-30',group:'CS-A'},
+  {type:'holiday',title:'Ugadi — Telugu New Year',desc:'All classes suspended. Labs rescheduled to 2 Apr.',date:'2026-03-31',group:'All Groups'},
+  {type:'exam',title:'Mid-Semester Internal — Unit 3',desc:'Subjects: OS, DBMS, CN. Hall A & B. 9:00 AM.',date:'2026-04-05',group:'CS-A'},
+  {type:'holiday',title:'Dr. B. R. Ambedkar Jayanti',desc:'National Holiday. No classes.',date:'2026-04-14',group:'All Groups'},
+  {type:'notice',title:'Online Submission Mandatory from April',desc:'All submissions via EduPortal 360.',date:'2026-03-27',group:'All Groups'},
+  {type:'notice',title:'Guest Lecture — AI in Healthcare',desc:'Dr. Kavitha Nair, IIT Madras. 8 Apr, 2 PM.',date:'2026-04-08',group:'CS-A'},
+  {type:'suspension',title:'Classes Suspended — Sports Day',desc:'Mandatory participation for credits.',date:'2026-04-18',group:'All Groups'},
+];
+
+let attendance = [
+  {sub:'Operating Systems',held:50,attended:46},
+  {sub:'DBMS',held:48,attended:41},
+  {sub:'Comp. Networks',held:46,attended:36},
+  {sub:'Soft. Engineering',held:44,attended:30},
+  {sub:'Mathematics IV',held:40,attended:38},
+];
+
+let timetable = [
+  {period:'1',time:'8:00–9:00',slots:['OS · Prof. Ramesh','Math · Prof. Sudha','DBMS · Prof. Lalitha','CN · Prof. Arun','SE · Prof. Meena']},
+  {period:'2',time:'9:00–10:00',slots:['DBMS · Prof. Lalitha','OS · Prof. Ramesh','SE · Prof. Meena','Math · Prof. Sudha','DBMS · Prof. Lalitha']},
+  {period:'3',time:'10:15–11:15',slots:['CN Lab ⚠️ Cancelled','SE · Prof. Meena','OS · Prof. Ramesh','DBMS · Prof. Lalitha','CN · Prof. Arun']},
+  {period:'4',time:'11:15–12:15',slots:['Math · Prof. Sudha','CN · Prof. Arun','Math · Prof. Sudha','OS Lab','OS · Prof. Ramesh']},
+  {period:'5',time:'1:00–2:00',slots:['SE · Prof. Meena','DBMS Lab','CN · Prof. Arun','SE · Prof. Meena','Math · Prof. Sudha']},
+];
+
+// ========== LOGIN ==========
+function setRole(role, el){
+  selectedRole = role;
+  document.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('rt-active'));
+  el.classList.add('rt-active');
+  document.getElementById('groupFieldWrap').style.display = role==='student'?'block':'none';
+}
+
+function togglePass(){
+  const inp = document.getElementById('loginPass');
+  inp.type = inp.type==='password'?'text':'password';
+}
+
+function quickLogin(role, email, pass, group){
+  selectedRole = role;
+  document.getElementById('loginEmail').value = email;
+  document.getElementById('loginPass').value = pass;
+  if(group) document.getElementById('loginGroup').value = group;
+  document.querySelectorAll('.role-tab').forEach((t,i)=>{
+    t.classList.remove('rt-active');
+    if(i===['student','faculty','admin'].indexOf(role)) t.classList.add('rt-active');
+  });
+  document.getElementById('groupFieldWrap').style.display = role==='student'?'block':'none';
+  doLogin();
+}
+
+function doLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+  const errEl = document.getElementById('loginError');
+  const acc = DEMO_ACCOUNTS[email];
+  if(!acc || acc.pass!==pass || acc.role!==selectedRole){
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+  currentUser = {...acc, loginEmail: email};
+  if(acc.role==='student') currentGroup = acc.group;
+  else currentGroup = 'CS-A';
+  // Transition
+  document.getElementById('loginPage').style.opacity='0';
+  document.getElementById('loginPage').style.transition='opacity .4s';
+  setTimeout(()=>{
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('appPage').classList.add('show');
+    setupAppForUser();
+    renderAll();
+  },400);
+}
+
+function doLogout(){
+  document.getElementById('appPage').classList.remove('show');
+  document.getElementById('appPage').style.display='none';
+  document.getElementById('loginPage').style.display='flex';
+  document.getElementById('loginPage').style.opacity='1';
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPass').value='';
+  currentUser=null;
+}
+
+function setupAppForUser(){
+  const u = currentUser;
+  const roleColors = {student:'var(--orange)',faculty:'var(--teal)',admin:'var(--purple)'};
+  const roleLabels = {student:'Student',faculty:'Faculty',admin:'Admin'};
+  // Header user pill
+  document.getElementById('userPill').innerHTML=`
+    <div class="uav" style="background:${u.avColor};">${u.avatar}</div>
+    <span class="uname">${u.name.split(' ')[0]}</span>
+    <span class="urole-tag" style="background:${u.avColor}22;color:${u.avColor};">${roleLabels[u.role]}</span>`;
+  // Header role buttons
+  const isWritable = u.role==='faculty'||u.role==='admin';
+  document.getElementById('hRoleBtns').innerHTML = isWritable
+    ? `<button class="hbtn primary" style="margin-right:4px;" onclick="openModal('modalAssign')">+ Assignment</button>
+       <button class="hbtn" onclick="openModal('modalHoliday')">📅 Add Notice</button>`
+    : '';
+  // Sidebar user
+  document.getElementById('sbUserRow').innerHTML=`
+    <div class="sb-av" style="background:${u.avColor};">${u.avatar}</div>
+    <div class="sb-info"><div class="sb-name">${u.name}</div><div class="sb-role">${roleLabels[u.role]}${u.role==='student'?' · '+u.group:''}</div></div>`;
+  // Group pills — faculty/admin see all; students fixed to their group
+  if(u.role==='student'){
+    document.getElementById('groupBox').innerHTML=`<div class="gb-label">Your Group</div><div style="font-size:14px;font-weight:700;color:var(--orange);">${u.group}</div>`;
+  } else {
+    document.getElementById('groupPills').innerHTML = ['CS-A','CS-B','IT-A','IT-B','ECE'].map((g,i)=>
+      `<button class="gpill ${i===0?'ga':''}" onclick="switchGroup(this,'${g}')">${g}</button>`).join('');
+  }
+  // Timetable edit hint
+  document.getElementById('ttSub').textContent = isWritable ? 'Click any cell to edit' : 'View-only for students';
+  document.getElementById('ttWarnBanner').style.display = isWritable ? 'flex' : 'none';
+  // Profile
+  document.getElementById('profileCard').innerHTML=`
+    <div style="width:68px;height:68px;border-radius:50%;background:${u.avColor};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;font-family:var(--display);margin:0 auto 13px;">${u.avatar}</div>
+    <div style="font-family:var(--display);font-size:20px;font-weight:700;">${u.name}</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px;">${roleLabels[u.role]}${u.role==='student'?' · Roll: '+u.roll:''}</div>
+    <div style="display:flex;gap:6px;justify-content:center;margin-top:13px;flex-wrap:wrap;">
+      ${u.role==='student'?`<span class="ag">${u.group}</span><span class="ag">Sem ${u.sem}</span><span class="ag">CGPA: ${u.cgpa}</span>`:`<span class="ag">${u.dept}</span>`}
+    </div>`;
+  document.getElementById('profileDetails').innerHTML=`
+    <div class="att-row"><div class="att-name" style="width:110px;">Email</div><div style="font-size:13px;">${u.email}</div></div>
+    <div class="att-row"><div class="att-name" style="width:110px;">Role</div><div style="font-size:13px;font-weight:600;color:${u.avColor};">${roleLabels[u.role]}</div></div>
+    ${u.role==='student'?`<div class="att-row"><div class="att-name" style="width:110px;">Roll No.</div><div style="font-size:13px;">${u.roll}</div></div>
+    <div class="att-row"><div class="att-name" style="width:110px;">Department</div><div style="font-size:13px;">${u.dept}</div></div>
+    <div class="att-row"><div class="att-name" style="width:110px;">CGPA</div><div style="font-size:13px;font-weight:700;color:var(--teal);">${u.cgpa} / 10</div></div>`:
+    `<div class="att-row"><div class="att-name" style="width:110px;">Department</div><div style="font-size:13px;">${u.dept}</div></div>`}`;
+  // Actions based on role
+  const canEdit = u.role!=='student';
+  document.getElementById('dashActions').innerHTML = canEdit
+    ? `<button class="btn btn-ghost btn-sm" onclick="goto('deadlines',null)">⏰ Deadlines</button><button class="btn btn-primary btn-sm" onclick="openModal('modalAssign')">+ Assignment</button>`
+    : `<button class="btn btn-ghost btn-sm" onclick="goto('deadlines',null)">⏰ Check Deadlines</button>`;
+  document.getElementById('assignActions').innerHTML = canEdit
+    ? `<button class="btn btn-primary btn-sm" onclick="openModal('modalAssign')">+ Add Assignment</button>`
+    : `<button class="btn btn-ghost btn-sm" onclick="goto('deadlines',null)">⏰ View Deadlines</button>`;
+  document.getElementById('holidayActions').innerHTML = canEdit
+    ? `<button class="btn btn-primary btn-sm" onclick="openModal('modalHoliday')">+ Add Notice</button>`:'';
+  document.getElementById('attendActions').innerHTML = canEdit
+    ? `<button class="btn btn-teal btn-sm" onclick="openModal('modalAttend')">📊 Update Attendance</button>`:'';
+}
+
+// ========== UTILS ==========
+function toast(msg,type='success'){
+  const c=document.getElementById('toastWrap');
+  const el=document.createElement('div');
+  el.className=`toast-item ${type}`;
+  el.innerHTML=`<span>${{success:'✅',warning:'⚠️',error:'❌'}[type]||'ℹ️'}</span><span>${msg}</span>`;
+  c.appendChild(el);
+  setTimeout(()=>el.remove(),3000);
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function goto(id,navEl){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(navEl)navEl.classList.add('active');
+  else document.querySelectorAll('.nav-item').forEach(n=>{if(n.textContent.trim().toLowerCase().startsWith(id.substring(0,5).toLowerCase()))n.classList.add('active');});
+  renderAll();
+}
+function switchGroup(el,g){
+  document.querySelectorAll('.gpill').forEach(p=>p.classList.remove('ga'));
+  el.classList.add('ga');
+  currentGroup=g;
+  toast(`Switched to ${g}`,'success');
+  renderAll();
+}
+function filterAssign(el,f){
+  el.closest('.fbar').querySelectorAll('.fbtn').forEach(b=>b.classList.remove('fa'));
+  el.classList.add('fa');
+  renderAssignTable(f);
+}
+function filterHoliday(el,f){
+  el.closest('.fbar').querySelectorAll('.fbtn').forEach(b=>b.classList.remove('fa'));
+  el.classList.add('fa');
+  renderHolidays(f);
+}
+function statusPill(s){
+  return {due:'<span class="pill p-due">Due Soon</span>',submitted:'<span class="pill p-sub">Submitted</span>',late:'<span class="pill p-late">Late</span>',pending:'<span class="pill p-pend">Pending</span>',review:'<span class="pill p-rev">Under Review</span>'}[s]||`<span class="pill p-pend">${s}</span>`;
+}
+function daysUntil(d){const now=new Date();now.setHours(0,0,0,0);const due=new Date(d);due.setHours(0,0,0,0);return Math.ceil((due-now)/86400000);}
+function fmtDate(d){return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}
+function attPct(a){return Math.round((a.attended/a.held)*100);}
+
+// ========== RENDER ALL ==========
+function renderAll(){renderDashboard();renderAssignTable('all');renderDeadlines();renderHolidays('all');renderAttendance();renderTimetable();updateNavCounts();}
+
+// ========== DASHBOARD ==========
+function renderDashboard(){
+  const myA=assignments.filter(a=>a.group===currentGroup||a.group==='All Groups');
+  const pending=myA.filter(a=>a.status==='pending'||a.status==='due').length;
+  const submitted=myA.filter(a=>a.status==='submitted').length;
+  const myH=holidays.filter(h=>h.group===currentGroup||h.group==='All Groups');
+  const holiCount=myH.filter(h=>h.type==='holiday').length;
+  const totalH=attendance.reduce((s,a)=>s+a.held,0);
+  const totalA=attendance.reduce((s,a)=>s+a.attended,0);
+  const overall=Math.round((totalA/totalH)*100);
+  const hr=new Date().getHours();
+  const greet=hr<12?'Good Morning':'hr<17?'Good Afternoon':'Good Evening';
+  document.getElementById('dashGreet').textContent=`${greet}, ${currentUser?.name?.split(' ')[0]||''} 👋`;
+  document.getElementById('dashSub').textContent=`${new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${currentGroup}`;
+  document.getElementById('ds1').textContent=pending;
+  document.getElementById('ds2').textContent=submitted;
+  document.getElementById('ds3').textContent=holiCount;
+  document.getElementById('ds4').textContent=overall+'%';
+  // Warnings
+  const warns=attendance.filter(a=>attPct(a)<75);
+  const lates=myA.filter(a=>a.status==='late');
+  let wHtml='';
+  if(warns.length)wHtml+=`<div class="danger-banner">🚨 Attendance shortage in: <strong>${warns.map(w=>w.sub).join(', ')}</strong> — below 75%!</div>`;
+  if(lates.length)wHtml+=`<div class="warn-banner">⚠️ ${lates.length} late submission${lates.length>1?'s':''}: <strong>${lates.map(l=>l.title).join(', ')}</strong></div>`;
+  document.getElementById('dashWarnings').innerHTML=wHtml;
+  // Assign list
+  const icons={'Operating Systems':'📄','DBMS':'🗂️','Comp. Networks':'🌐','Soft. Engineering':'📝','Mathematics IV':'📐'};
+  const bgs={'Operating Systems':'var(--red2)','DBMS':'var(--blue2)','Comp. Networks':'var(--teal2)','Soft. Engineering':'var(--amber2)','Mathematics IV':'var(--purple2)'};
+  document.getElementById('dashAssignList').innerHTML=myA.slice(0,4).map(a=>`<div class="ai"><div class="ai-ico" style="background:${bgs[a.subject]||'var(--bg2)'};">${icons[a.subject]||'📋'}</div><div class="ai-info"><div class="ai-name">${a.title}</div><div class="ai-meta">${a.faculty} · Due ${fmtDate(a.due)}</div></div>${statusPill(a.status)}</div>`).join('');
+  // Announcements
+  const tagMap={holiday:'at-hol',suspension:'at-sus',exam:'at-ex',notice:'at-not'};
+  const tagLabel={holiday:'🌿 Holiday',suspension:'⚠️ Suspension',exam:'📝 Exam',notice:'📢 Notice'};
+  document.getElementById('dashAnnList').innerHTML=myH.slice(0,3).map(h=>`<div class="ann"><div class="atag ${tagMap[h.type]}">${tagLabel[h.type]}</div><div class="ann-title">${h.title}</div><div class="ann-groups"><span class="ag">${h.group}</span></div></div>`).join('');
+  // Attendance
+  document.getElementById('dashAttList').innerHTML=attendance.map(a=>{const p=attPct(a);const c=p<75?'var(--red)':p<85?'var(--amber)':'var(--teal)';return`<div class="att-row"><div class="att-name">${a.sub.replace('Operating Systems','OS').replace('Comp. Networks','CN').replace('Soft. Engineering','SE').replace('Mathematics IV','Math IV')}</div><div class="att-track"><div class="att-bar" style="width:${p}%;background:${c};"></div></div><div class="att-pct" style="color:${c};">${p}%</div></div>`;}).join('');
+  // Calendar
+  const upAnn=myH.filter(h=>daysUntil(h.date)>=0&&daysUntil(h.date)<=7).slice(0,2);
+  document.getElementById('dashCalAnn').innerHTML=upAnn.map(h=>`<div class="ann"><div class="atag ${tagMap[h.type]}">${tagLabel[h.type]}</div><div class="ann-title">${h.title}</div><div class="ann-date">${fmtDate(h.date)}</div></div>`).join('');
+  // Deadline card
+  const upcoming=myA.filter(a=>a.status!=='submitted').sort((a,b)=>new Date(a.due)-new Date(b.due));
+  if(upcoming.length){
+    const next=upcoming[0];const d=daysUntil(next.due);const col=d<=1?'var(--red)':d<=3?'var(--amber)':'var(--teal)';
+    document.getElementById('dashDeadlineCard').innerHTML=`<div style="font-size:12px;color:var(--muted);">${next.subject}</div><div style="font-size:16px;font-weight:700;color:${col};margin-top:3px;">${next.title}</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Due: ${fmtDate(next.due)}</div><div class="countdown"><div class="cdb"><div class="cdn" id="cdH2">--</div><div class="cdl">Hours</div></div><div class="cdb"><div class="cdn" id="cdM2">--</div><div class="cdl">Mins</div></div><div class="cdb"><div class="cdn" id="cdS2">--</div><div class="cdl">Secs</div></div></div>${upcoming.length>1?`<div style="margin-top:11px;padding-top:11px;border-top:1.5px solid var(--border);">${upcoming.slice(1,3).map(u=>`<div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;"><span>${u.title}</span><span style="color:var(--amber);font-weight:600;">${fmtDate(u.due)}</span></div>`).join('')}</div>`:''}`;
+  } else {
+    document.getElementById('dashDeadlineCard').innerHTML=`<div style="font-size:14px;color:var(--teal);font-weight:600;padding:10px 0;">🎉 No pending deadlines!</div>`;
+  }
+}
+
+// ========== COUNTDOWN ==========
+function tickCountdown(){
+  const now=new Date();const due=new Date();due.setDate(due.getDate()+1);due.setHours(23,59,0,0);
+  const diff=due-now;
+  if(diff>0){const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);const f=v=>String(v).padStart(2,'0');
+  ['cdH','cdM','cdS','cdH2','cdM2','cdS2'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=f([h,m,s,h,m,s][i]);});}
+}
+setInterval(tickCountdown,1000);tickCountdown();
+
+// ========== ASSIGNMENTS ==========
+function renderAssignTable(filter='all'){
+  const canEdit=currentUser&&currentUser.role!=='student';
+  const myA=assignments.filter(a=>a.group===currentGroup||a.group==='All Groups');
+  const filtered=filter==='all'?myA:myA.filter(a=>a.status===filter);
+  const icons={'Operating Systems':'📄','DBMS':'🗂️','Comp. Networks':'🌐','Soft. Engineering':'📝','Mathematics IV':'📐'};
+  document.getElementById('assignSub').textContent=`${currentGroup} · All Subjects`;
+  document.getElementById('assignTable').innerHTML=filtered.map(a=>{
+    const ri=assignments.indexOf(a);const d=daysUntil(a.due);
+    const dc=a.status==='submitted'?'var(--muted)':d<=1?'var(--red)':d<=3?'var(--amber)':'var(--ink2)';
+    return`<tr>
+      <td style="font-weight:600;">${icons[a.subject]||'📋'} ${a.title}</td>
+      <td style="color:var(--muted);">${a.subject}</td>
+      <td style="color:var(--muted);">${a.faculty}</td>
+      <td><span class="ag">${a.group}</span></td>
+      <td style="color:${dc};font-weight:${d<=3&&a.status!=='submitted'?'600':'400'};">${fmtDate(a.due)}</td>
+      <td>${statusPill(a.status)}</td>
+      <td><div class="tbl-act">
+        <button class="btn btn-ghost btn-sm" onclick="openStatusModal(${ri})">📌</button>
+        ${canEdit?`<button class="btn btn-ghost btn-sm" onclick="editAssign(${ri})">✏️</button><button class="btn btn-danger btn-sm" onclick="deleteAssign(${ri})">🗑️</button>`:''}
+      </div></td>
+    </tr>`;
+  }).join('');
+  if(!filtered.length)document.getElementById('assignTable').innerHTML=`<tr><td colspan="7" style="text-align:center;padding:22px;color:var(--muted);">No assignments found.</td></tr>`;
+  updateNavCounts();
+}
+
+function saveAssignment(){
+  const title=document.getElementById('aTitle').value.trim();
+  const subject=document.getElementById('aSubject').value;
+  const faculty=document.getElementById('aFaculty').value.trim();
+  const due=document.getElementById('aDue').value;
+  const group=document.getElementById('aGroup').value;
+  const desc=document.getElementById('aDesc').value.trim();
+  if(!title||!due||!faculty){toast('Fill all required fields.','error');return;}
+  const d=daysUntil(due);const status=d<0?'late':d<=3?'due':'pending';
+  const obj={title,subject,faculty,group,due,status,desc};
+  if(editingAssignIdx!==null){assignments[editingAssignIdx]=obj;toast(`"${title}" updated!`,'success');editingAssignIdx=null;}
+  else{assignments.push(obj);toast(`"${title}" added!`,'success');}
+  closeModal('modalAssign');clearAssignForm();renderAll();
+}
+function editAssign(idx){
+  editingAssignIdx=idx;const a=assignments[idx];
+  document.getElementById('assignModalTitle').textContent='Edit Assignment';
+  document.getElementById('aTitle').value=a.title;document.getElementById('aSubject').value=a.subject;
+  document.getElementById('aFaculty').value=a.faculty;document.getElementById('aDue').value=a.due;
+  document.getElementById('aGroup').value=a.group;document.getElementById('aDesc').value=a.desc||'';
+  openModal('modalAssign');
+}
+function deleteAssign(idx){const n=assignments[idx].title;assignments.splice(idx,1);toast(`"${n}" deleted.`,'warning');renderAll();}
+function clearAssignForm(){['aTitle','aFaculty','aDue','aDesc'].forEach(id=>document.getElementById(id).value='');document.getElementById('assignModalTitle').textContent='Add Assignment';editingAssignIdx=null;}
+function openStatusModal(idx){editingStatusIdx=idx;document.getElementById('statusAssignName').textContent=assignments[idx].title;document.getElementById('statusVal').value=assignments[idx].status;document.getElementById('statusNote').value='';openModal('modalStatus');}
+function saveStatus(){if(editingStatusIdx===null)return;assignments[editingStatusIdx].status=document.getElementById('statusVal').value;toast('Status updated!','success');closeModal('modalStatus');editingStatusIdx=null;renderAll();}
+
+// ========== DEADLINES ==========
+function renderDeadlines(){
+  const myA=assignments.filter(a=>(a.group===currentGroup||a.group==='All Groups')&&a.status!=='submitted');
+  const sorted=[...myA].sort((a,b)=>new Date(a.due)-new Date(b.due));
+  const urgent=sorted.filter(a=>daysUntil(a.due)<=1);
+  const soon=sorted.filter(a=>daysUntil(a.due)>1&&daysUntil(a.due)<=4);
+  let wHtml='';
+  if(urgent.length)wHtml+=`<div class="danger-banner">🚨 ${urgent.length} assignment${urgent.length>1?'s':''} due within 24 hours! <strong>${urgent.map(u=>u.title).join(', ')}</strong></div>`;
+  if(soon.length)wHtml+=`<div class="warn-banner">⚠️ ${soon.length} assignment${soon.length>1?'s':''} due within 4 days!</div>`;
+  document.getElementById('deadlineWarnings').innerHTML=wHtml;
+  document.getElementById('deadlineList').innerHTML=sorted.length?sorted.map(a=>{
+    const d=daysUntil(a.due);const cls=d<=1?'urgent':d<=3?'soon':'';
+    const col=d<=1?'var(--red)':d<=3?'var(--amber)':'var(--teal)';
+    const dt=d<0?`${Math.abs(d)}d over`:d===0?'Today':d===1?'Tomorrow':`${d} days`;
+    return`<div class="dl-item ${cls}"><div class="dl-days" style="color:${col};">${dt}</div><div class="dl-info"><div class="dl-name">${a.title}</div><div class="dl-meta">${a.subject} · ${fmtDate(a.due)}</div></div>${statusPill(a.status)}<button class="btn btn-ghost btn-sm" onclick="openStatusModal(${assignments.indexOf(a)})">Update</button></div>`;
+  }).join(''):`<div style="text-align:center;padding:26px;color:var(--teal);font-size:14px;font-weight:600;">🎉 All caught up!</div>`;
+  const next=sorted[0];
+  if(next){const d=daysUntil(next.due);const col=d<=1?'var(--red)':d<=3?'var(--amber)':'var(--teal)';
+    document.getElementById('deadlineCountdown').innerHTML=`<div style="font-size:12px;color:var(--muted);">${next.subject}</div><div style="font-size:16px;font-weight:700;color:${col};margin-top:3px;">${next.title}</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Due: ${fmtDate(next.due)}</div><div class="countdown"><div class="cdb"><div class="cdn" id="cdH">--</div><div class="cdl">Hours</div></div><div class="cdb"><div class="cdn" id="cdM">--</div><div class="cdl">Mins</div></div><div class="cdb"><div class="cdn" id="cdS">--</div><div class="cdl">Secs</div></div></div>`;
+  } else {document.getElementById('deadlineCountdown').innerHTML=`<div style="font-size:14px;color:var(--teal);font-weight:600;">🎉 No deadlines!</div>`;}
+}
+
+// ========== HOLIDAYS ==========
+function renderHolidays(filter='all'){
+  const myH=holidays.filter(h=>h.group===currentGroup||h.group==='All Groups');
+  const filtered=filter==='all'?myH:myH.filter(h=>h.type===filter);
+  const canEdit=currentUser&&currentUser.role!=='student';
+  const tagMap={holiday:'at-hol',suspension:'at-sus',exam:'at-ex',notice:'at-not'};
+  const tagLabel={holiday:'🌿 Holiday',suspension:'⚠️ Suspension',exam:'📝 Exam',notice:'📢 Notice'};
+  const cardCls={holiday:'hc-hol',suspension:'hc-sus',exam:'hc-ex',notice:'hc-not'};
+  document.getElementById('holidaySub').textContent=`${currentGroup} · All Types`;
+  document.getElementById('holidayList').innerHTML=filtered.map(h=>{
+    const ri=holidays.indexOf(h);
+    return`<div class="hcard ${cardCls[h.type]}"><div class="hctop"><div><div class="atag ${tagMap[h.type]}">${tagLabel[h.type]}</div><div class="hcname">${h.title}</div></div><div class="hcdate">${fmtDate(h.date)}</div></div><div class="hcdesc">${h.desc}</div><div class="ann-groups"><span class="ag">${h.group}</span></div>${canEdit?`<div class="hc-actions"><button class="btn btn-ghost btn-sm" onclick="editHoliday(${ri})">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteHoliday(${ri})">🗑️</button></div>`:''}</div>`;
+  }).join('')||`<div style="padding:18px;color:var(--muted);text-align:center;">No entries yet.</div>`;
+  // Group notices
+  const groups=['CS-A','CS-B','IT-A','IT-B','ECE','All Groups'];
+  document.getElementById('groupNotices').innerHTML=groups.map(g=>{
+    const gH=holidays.filter(h=>h.group===g||h.group==='All Groups');
+    if(!gH.length)return'';
+    return`<div style="margin-bottom:13px;"><div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px;">${g}</div>${gH.slice(0,2).map(h=>`<div class="ann"><div class="atag ${tagMap[h.type]}">${tagLabel[h.type]}</div><div class="ann-title">${h.title}</div><div class="ann-date">${fmtDate(h.date)}</div></div>`).join('')}${gH.length>2?`<div style="font-size:11px;color:var(--orange);cursor:pointer;">+${gH.length-2} more</div>`:''}</div>`;
+  }).join('');
+}
+function saveHoliday(){
+  const type=document.getElementById('hType').value,title=document.getElementById('hTitle').value.trim(),desc=document.getElementById('hDesc').value.trim(),date=document.getElementById('hDate').value,group=document.getElementById('hGroup').value;
+  if(!title||!date){toast('Fill required fields.','error');return;}
+  const obj={type,title,desc,date,group};
+  if(editingHolidayIdx!==null){holidays[editingHolidayIdx]=obj;toast(`Updated!`,'success');editingHolidayIdx=null;}
+  else{holidays.push(obj);toast(`"${title}" added!`,'success');}
+  closeModal('modalHoliday');['hTitle','hDesc','hDate'].forEach(id=>document.getElementById(id).value='');editingHolidayIdx=null;renderAll();
+}
+function editHoliday(idx){
+  editingHolidayIdx=idx;const h=holidays[idx];
+  document.getElementById('holidayModalTitle').textContent='Edit Notice';
+  document.getElementById('hType').value=h.type;document.getElementById('hTitle').value=h.title;document.getElementById('hDesc').value=h.desc;document.getElementById('hDate').value=h.date;document.getElementById('hGroup').value=h.group;openModal('modalHoliday');
+}
+function deleteHoliday(idx){const n=holidays[idx].title;holidays.splice(idx,1);toast(`"${n}" removed.`,'warning');renderAll();}
+
+// ========== ATTENDANCE ==========
+function renderAttendance(){
+  const totalH=attendance.reduce((s,a)=>s+a.held,0),totalA=attendance.reduce((s,a)=>s+a.attended,0),overall=Math.round((totalA/totalH)*100);
+  const warns=attendance.filter(a=>attPct(a)<75);
+  document.getElementById('attOverall').textContent=overall+'%';document.getElementById('attAttended').textContent=totalA;document.getElementById('attHeldStat').textContent=totalH;document.getElementById('attWarnStat').textContent=warns.length;
+  let wHtml='';
+  warns.forEach(a=>{const p=attPct(a);const need=Math.ceil((0.75*a.held-a.attended)/(1-0.75));wHtml+=`<div class="danger-banner">🚨 <strong>${a.sub}</strong>: ${p}% — below 75%! Need next ${need} consecutive classes.</div>`;});
+  document.getElementById('attWarnings').innerHTML=wHtml;
+  document.getElementById('attTable').innerHTML=attendance.map((a,i)=>{const p=attPct(a);const c=p<75?'var(--red)':p<85?'var(--amber)':'var(--teal)';return`<div class="att-row"><div class="att-name">${a.sub}</div><div class="att-track"><div class="att-bar" style="width:${p}%;background:${c};"></div></div><div class="att-pct" style="color:${c};">${p}%${p<75?' ⚠️':''}</div><span class="att-edit" onclick="quickEditAtt(${i})">Edit</span></div>`;}).join('');
+}
+function quickEditAtt(i){document.getElementById('attSubject').value=attendance[i].sub;document.getElementById('attHeld').value=attendance[i].held;document.getElementById('attAtt').value=attendance[i].attended;prefillAtt();openModal('modalAttend');}
+function prefillAtt(){const sub=document.getElementById('attSubject').value;const found=attendance.find(a=>a.sub===sub);if(found){document.getElementById('attHeld').value=found.held;document.getElementById('attAtt').value=found.attended;}updateAttPreview();}
+function updateAttPreview(){const held=parseInt(document.getElementById('attHeld').value)||0,att=parseInt(document.getElementById('attAtt').value)||0;if(held&&att){const p=Math.round((att/held)*100);const c=p<75?'var(--red)':p<85?'var(--amber)':'var(--teal)';document.getElementById('attPreview').innerHTML=`<span style="color:${c};font-weight:600;">${p}% attendance</span> (${att}/${held} classes)`;}}
+function saveAttendance(){const sub=document.getElementById('attSubject').value,held=parseInt(document.getElementById('attHeld').value),att=parseInt(document.getElementById('attAtt').value);if(!held||att===undefined||att>held){toast('Invalid values.','error');return;}const idx=attendance.findIndex(a=>a.sub===sub);if(idx>=0)attendance[idx]={sub,held,attended:att};else attendance.push({sub,held,attended:att});toast(`${sub} updated to ${Math.round((att/held)*100)}%`,'success');closeModal('modalAttend');renderAll();}
+
+// ========== TIMETABLE ==========
+function renderTimetable(){
+  const canEdit=currentUser&&currentUser.role!=='student';
+  document.getElementById('ttBody').innerHTML=timetable.map((row,ri)=>`<tr><td style="font-weight:700;">${row.period}</td><td style="color:var(--muted);white-space:nowrap;">${row.time}</td>${row.slots.map((slot,di)=>{const isCan=slot.includes('Cancelled');return`<td style="color:${isCan?'var(--red)':'var(--ink2)'};">${canEdit?`<div class="tt-cell" onclick="openTTModal(${ri},${di})">${slot}</div>`:`<span>${slot}</span>`}</td>`;}).join('')}</tr>`).join('');
+}
+function openTTModal(ri,di){editingTTCell={ri,di};const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];const val=timetable[ri].slots[di];document.getElementById('ttCellInfo').textContent=`${days[di]} · Period ${timetable[ri].period} · ${timetable[ri].time}`;const parts=val.split(' · ');document.getElementById('ttSubject').value=parts[0]||'';document.getElementById('ttFaculty').value=parts[1]||'';document.getElementById('ttNote').value=val.includes('⚠️')?val.split('⚠️')[1].trim():'';openModal('modalTT');}
+function saveTTCell(){if(!editingTTCell)return;const{ri,di}=editingTTCell;const sub=document.getElementById('ttSubject').value,fac=document.getElementById('ttFaculty').value,note=document.getElementById('ttNote').value.trim();timetable[ri].slots[di]=sub+(fac?` · ${fac}`:'')+(note?` ⚠️ ${note}`:'');toast('Timetable updated!','success');closeModal('modalTT');renderTimetable();}
+
+// ========== NAV COUNTS ==========
+function updateNavCounts(){
+  const myA=assignments.filter(a=>a.group===currentGroup||a.group==='All Groups');
+  const pend=myA.filter(a=>a.status==='pending'||a.status==='due'||a.status==='late').length;
+  const urg=myA.filter(a=>a.status!=='submitted'&&daysUntil(a.due)<=1).length;
+  const warns=attendance.filter(a=>attPct(a)<75).length;
+  document.getElementById('pendCnt').textContent=pend||'';
+  document.getElementById('urgCnt').textContent=urg||'';
+  document.getElementById('warnCnt').textContent=warns||'';
+  document.getElementById('notifBadge').style.display=(urg>0||warns>0)?'block':'none';
+}
+
+// Close modals on backdrop click
+document.querySelectorAll('.modal-bg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('open');}));
+
+// Enter key on login
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginPage').style.display!=='none')doLogin();});
+</script>
+</body>
+</html>
